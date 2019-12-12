@@ -19,10 +19,10 @@ public class Tile extends JLabel{
         }
         setIcon(biome);
     }
-    public void GrowGrass(){
+    public void growGrass(){
         setIcon(grass);
     }
-    public void RemoveGrass(){
-        setIcon(biome);
+    public void removeGrass(){
+        setIcon(grass);
     }
 }

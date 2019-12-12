@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="403552bc-ab75-45c6-9c4a-538c0dc5731e" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="403552bc-ab75-45c6-9c4a-538c0dc5731e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/agh/cs/lab2/SwingMapVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/agh/cs/lab2/SwingMapVisualizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/agh/cs/lab2/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/agh/cs/lab2/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/agh/cs/lab2/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/agh/cs/lab2/World.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,23 +74,7 @@
       <recent name="C:\Users\student47\IdeaProjects\lab2\src\main" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Application.World">
-    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
-      <Host>localhost</Host>
-      <Port>5050</Port>
-    </configuration>
     <configuration default="true" type="Applet">
       <option name="HEIGHT" value="0" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
@@ -94,6 +82,10 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
     </configuration>
     <configuration name="World" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="agh.cs.lab2.World" />
@@ -247,6 +239,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -291,6 +295,38 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="429" y="170" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.0.1280.680@0.0.1280.680" timestamp="1575763424140" />
+    <state width="1238" height="204" key="GridCell.Tab.0.bottom" timestamp="1576154397594">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1238" height="204" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1576154397594" />
+    <state width="1238" height="204" key="GridCell.Tab.0.center" timestamp="1576154397594">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1238" height="204" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1576154397594" />
+    <state width="1238" height="204" key="GridCell.Tab.0.left" timestamp="1576154397594">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1238" height="204" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1576154397594" />
+    <state width="1238" height="204" key="GridCell.Tab.0.right" timestamp="1576154397594">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1238" height="204" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1576154397594" />
+    <state width="1238" height="204" key="GridCell.Tab.1.bottom" timestamp="1576154397594">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1238" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1576154397594" />
+    <state width="1238" height="204" key="GridCell.Tab.1.center" timestamp="1576154397594">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1238" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1576154397594" />
+    <state width="1238" height="204" key="GridCell.Tab.1.left" timestamp="1576154397594">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1238" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1576154397594" />
+    <state width="1238" height="204" key="GridCell.Tab.1.right" timestamp="1576154397594">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1238" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1576154397594" />
     <state x="341" y="164" key="com.intellij.ide.util.TipDialog" timestamp="1575981331121">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -301,15 +337,6 @@
     <state x="536" y="0" width="744" height="680" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1575761540696" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/agh/cs/lab2/SwingMapVisualizer.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="((java.util.ArrayList)((GrassField)map).lawn).get(4)" custom="agh.cs.lab2.GrassField,java.util.ArrayList" />
