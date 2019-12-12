@@ -22,7 +22,7 @@ public class Tile extends JLabel{
     public void growGrass(){
         setIcon(grass);
     }
-    public void removeGrass(){
+    public void removeTile(){
         setIcon(grass);
     }
 }
