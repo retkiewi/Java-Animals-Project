@@ -1,11 +1,16 @@
 package agh.cs.lab2;
 
+import java.util.concurrent.TimeUnit;
+
 public class World {
     public static void main(String args[]) {
         try {
-            LoopingMap projectSpace = new LoopingMap(new Vector2d(50, 30), 14);
-            projectSpace.advanceYear();
-        }catch(IllegalArgumentException ex){
+            LoopingMap projectSpace = new LoopingMap(100, 30, 10);
+            while(true){
+                projectSpace.advanceYear();
+                TimeUnit.MILLISECONDS.sleep(5);
+            }
+        }catch(IllegalArgumentException | InterruptedException ex){
             ex.printStackTrace();
         }
     }

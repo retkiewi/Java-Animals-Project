@@ -8,22 +8,25 @@ import java.util.List;
 
 public class SwingMapVisualizer implements IPositionObserver{
     JFrame f = new JFrame();
-    List<Tile> tileSet;
+    List<List<Tile>> tileSet;
     Vector2d topRight;
     LoopingMap map;
     SwingMapVisualizer(LoopingMap map, Vector2d bottomLeft, Vector2d topRight, Vector2d jungleBottomLeft, Vector2d jungleTopRight){
         this.topRight = topRight;
         f.setSize(topRight.x*15,topRight.y*15);
-        GridLayout tilesGrid = new GridLayout(topRight.y, topRight.x, 1, 1);
+        GridLayout tilesGrid = new GridLayout(topRight.y+1, topRight.x+1, 1, 1);
         f.setLayout(tilesGrid);
         tileSet = new ArrayList<>();
-        for(int i=0; i<topRight.x*topRight.y; i++){
+        for(int i=0; i<=topRight.y; i++){
+            tileSet.add(new ArrayList<>());
+            for(int j = 0; j<=topRight.x; j++){
             boolean isJungle = false;
-            if(i%topRight.x >= jungleBottomLeft.x && i%topRight.x <= jungleTopRight.x && i/topRight.x >= jungleBottomLeft.y && i/topRight.x <= jungleTopRight.y)
+            if(i>=jungleBottomLeft.y && j>=jungleBottomLeft.x && i<=jungleTopRight.y && j<=jungleTopRight.x)
                 isJungle = true;
             Tile tile = new Tile(isJungle);
             f.add(tile);
-            tileSet.add(tile);
+            tileSet.get(i).add(tile);
+            }
         }
         f.setVisible(true);
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -35,7 +38,7 @@ public class SwingMapVisualizer implements IPositionObserver{
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition, MapEntity o) {
         List<MapEntity> objectsAtOld = map.objectsAt(oldPosition);
         if(objectsAtOld.isEmpty())
-            tileSet.get(vectorToInt(oldPosition)).removeTile();
+            tileSet.get(oldPosition.y).get(oldPosition.x).removeTile();
         else
             drawAnimal(oldPosition, objectsAtOld.get(0));
         drawAnimal(newPosition, map.objectsAt(newPosition).get(0));
@@ -46,7 +49,7 @@ public class SwingMapVisualizer implements IPositionObserver{
     }
 
     public void grassGrown(Vector2d position){
-        tileSet.get(vectorToInt(position)).growGrass();
+        tileSet.get(position.y).get(position.x).growGrass();
     }
 
     private int vectorToInt(Vector2d position){
