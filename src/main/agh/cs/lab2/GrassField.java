@@ -1,4 +1,4 @@
-package agh.cs.lab2;
+/*package agh.cs.lab2;
 
 import java.util.*;
 
@@ -79,3 +79,4 @@ public class GrassField extends AbstractWorldMap{
         return temp.draw(this.bottom_left, this.upper_right);
     }
 }
+*/

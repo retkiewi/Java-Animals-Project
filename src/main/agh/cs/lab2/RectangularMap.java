@@ -1,4 +1,4 @@
-package agh.cs.lab2;
+/*package agh.cs.lab2;
 
 public class RectangularMap extends AbstractWorldMap{
 
@@ -39,3 +39,4 @@ public class RectangularMap extends AbstractWorldMap{
         return drawing;
     }
 }
+*/

@@ -67,3 +67,34 @@ enum MapDirection {
         }
     }
 }
+
+enum TurningDirection{
+    NORTH,
+    NORTHEAST,
+    EAST,
+    EASTSOUTH,
+    SOUTH,
+    SOUTHWEST,
+    WEST,
+    WESTNORTH,
+    INVALID_DIRECTION;
+
+    public TurningDirection turn(int i){
+        TurningDirection[] vals = values();
+        return vals[(this.ordinal()+i)%(vals.length-1)];
+    }
+
+    public Vector2d toUnitVector(){
+        switch (this){
+            case NORTH: return new Vector2d(0,1);
+            case NORTHEAST: return new Vector2d(1,1);
+            case EAST: return new Vector2d(1,0);
+            case EASTSOUTH: return new Vector2d(1,-1);
+            case SOUTH: return new Vector2d(0,-1);
+            case SOUTHWEST: return new Vector2d(-1,-1);
+            case WEST: return new Vector2d(-1,0);
+            case WESTNORTH: return new Vector2d(-1,1);
+            default: return new Vector2d(0,0);
+        }
+    }
+}

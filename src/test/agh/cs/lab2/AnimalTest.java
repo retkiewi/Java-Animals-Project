@@ -1,4 +1,4 @@
-
+/*
 package agh.cs.lab2;
 
 
@@ -76,3 +76,4 @@ public class AnimalTest {
         assertTrue(Arrays.equals(kierunki, nowe_kierunki));
     }
 }
+*/

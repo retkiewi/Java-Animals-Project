@@ -1,4 +1,4 @@
-package agh.cs.lab2;
+/*package agh.cs.lab2;
 
 import java.util.*;
 
@@ -47,3 +47,4 @@ public class MapBoundary implements IPositionObserver{
         this.setY.add(o);
     }
 }
+*/

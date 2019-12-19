@@ -1,4 +1,4 @@
-package agh.cs.lab2;
+/*package agh.cs.lab2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionObserver{
             animal.addObserver(border);
             return true;
         }
-        throw new IllegalArgumentException("Position on the map is allredy occupied!");
+        throw new IllegalArgumentException("Position on the map is already occupied!");
     }
 
     @Override
@@ -61,3 +61,4 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionObserver{
         return drawing;
     }
 }
+*/
