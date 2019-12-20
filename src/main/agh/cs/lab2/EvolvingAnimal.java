@@ -80,7 +80,7 @@ public class EvolvingAnimal extends MapEntity{
     }
 
     private int[] inherit(Animal[] parents){
-        return null;
+
     }
 
     private void die(){

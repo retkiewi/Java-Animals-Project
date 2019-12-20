@@ -353,12 +353,12 @@
         <line-breakpoint type="java-line">
           <condition expression="position.x == 21 &amp;&amp; position.y == 11" language="JAVA" />
           <url>file://$PROJECT_DIR$/src/main/agh/cs/lab2/LoopingMap.java</url>
-          <line>58</line>
+          <line>74</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/agh/cs/lab2/LoopingMap.java</url>
-          <line>65</line>
+          <line>81</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -367,9 +367,15 @@
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <condition expression="hashedEntities.get(oldPosition)==null" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/main/agh/cs/lab2/LoopingMap.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/agh/cs/lab2/EvolvingAnimal.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="36" />
+          <line>31</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
