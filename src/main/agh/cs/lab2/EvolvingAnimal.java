@@ -33,7 +33,12 @@ public class EvolvingAnimal extends MapEntity{
         this.position = parent2.position.add(orientation.toUnitVector());
         this.parents[0] = parent1;
         this.parents[1] = parent2;
-        //this.genome = inherit(this.parents);
+        this.genome = inherit(this.parents);
+        parent1.energy-=map.animalMaxEnergy/4;
+        parent1.age=0;
+        parent2.energy-=map.animalMaxEnergy/4;
+        parent2.age=0;
+        this.energy=map.animalMaxEnergy/4 + map.animalMaxEnergy/4;
         notifyObservers(new Vector2d(-1, -1));
     }
 
@@ -79,8 +84,20 @@ public class EvolvingAnimal extends MapEntity{
         return genome;
     }
 
-    private int[] inherit(Animal[] parents){
-
+    private int[] inherit(EvolvingAnimal[] parents){
+        int[] genome = new int[32];
+        int i=0;
+        for(; i<random.nextInt(16); i++){
+            genome[i]=parents[0].genome[i];
+        }
+        int j=i+1;
+        for(; j<i+random.nextInt(16)+1; j++){
+            genome[j]=parents[1].genome[j];
+        }
+        for(i=j+1; i<32; i++){
+            genome[i]=random.nextInt(8);
+        }
+        return validateGenome(genome);
     }
 
     private void die(){

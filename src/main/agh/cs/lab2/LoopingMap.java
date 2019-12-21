@@ -15,14 +15,16 @@ public class LoopingMap implements IPositionObserver{
     Random random = new Random();
     SwingMapVisualizer visualizer;
     HashMap<Vector2d, List<Event>> events = new HashMap<>();
-    int grassEnergy;
+    public int grassEnergy;
+    public int animalMaxEnergy;
 
 
-    LoopingMap(int xSize, int ySize, int jungle_size, int grassEnergy){
+    LoopingMap(int xSize, int ySize, int jungle_size, int grassEnergy, int animalMaxEnergy){
         topRight = new Vector2d(xSize-1, ySize-1);
         this.grassEnergy=grassEnergy;
         jungleTopRight = new Vector2d((topRight.x + jungle_size)/2, (topRight.y + jungle_size)/2);
         jungleBottomLeft = new Vector2d((topRight.x - jungle_size)/2+1, (topRight.y - jungle_size)/2+1);
+        this.animalMaxEnergy = animalMaxEnergy;
         visualizer = new SwingMapVisualizer(this, this.bottomLeft, this.topRight, this.jungleBottomLeft, this.jungleTopRight);
     }
 
@@ -210,18 +212,18 @@ public class LoopingMap implements IPositionObserver{
         List<EvolvingAnimal> temp = getAnimalsByStrength(position);
         List<EvolvingAnimal> temp2 = new ArrayList<>();
         for (EvolvingAnimal animal:temp) {
-            if(animal.age >= 18 && animal.energy>=1.5*grassEnergy)
+            if(animal.age >= 18 && animal.energy>=animalMaxEnergy/4)
                 temp2.add(animal);
         }
-        for(int i=1; i<temp2.size(); i+=2){
-            new EvolvingAnimal(this, temp2.get(i), temp2.get(i-1));
+        if(temp2.size()>=2){
+            new EvolvingAnimal(this, temp2.get(0), temp2.get(1));
         }
     }
 
     private void eat(Vector2d position){
         List<MapEntity> temp = strongestAnimals(position);
         for (MapEntity animal : temp) {
-            ((EvolvingAnimal)animal).energy = java.lang.Math.max(((EvolvingAnimal)animal).energy+grassEnergy/temp.size(), grassEnergy*5);
+            ((EvolvingAnimal)animal).energy = java.lang.Math.max(((EvolvingAnimal)animal).energy+grassEnergy/temp.size(), animalMaxEnergy);
         }
         MapEntity tempGrass = null;
         for(MapEntity entity : hashedEntities.get(position)){
@@ -287,7 +289,7 @@ public class LoopingMap implements IPositionObserver{
     }
 
     private MapEntity getStrongestAnimal(List<MapEntity> animals){
-        if(animals.isEmpty())
+        if(animals == null || animals.isEmpty())
             return null;
         MapEntity temp = animals.get(0);
         for(MapEntity entity : animals){

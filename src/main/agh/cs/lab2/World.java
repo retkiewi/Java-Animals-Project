@@ -8,15 +8,16 @@ public class World {
         try {
             int xSize = 80;
             int ySize = 30;
-            int jungleSize = 12;
-            int grassEnergy = 15;
+            int jungleSize = 10;
+            int grassEnergy = 5;
+            int animalMaxEnergy= 100;
             Random random = new Random();
-            LoopingMap projectSpace = new LoopingMap(xSize, ySize, jungleSize, grassEnergy);
-            for(int i=0; i<20; i++)
-                new EvolvingAnimal(new Vector2d(random.nextInt(xSize),random.nextInt(ySize)), TurningDirection.NORTH, grassEnergy*5, projectSpace);
+            LoopingMap projectSpace = new LoopingMap(xSize, ySize, jungleSize, grassEnergy, animalMaxEnergy);
+            for(int i=0; i<40; i++)
+                new EvolvingAnimal(new Vector2d(random.nextInt(xSize),random.nextInt(ySize)), TurningDirection.NORTH, animalMaxEnergy/2, projectSpace);
             while(true){
                 projectSpace.advanceYear();
-                TimeUnit.MILLISECONDS.sleep(200);
+                TimeUnit.MILLISECONDS.sleep(100);
             }
         }catch(IllegalArgumentException | InterruptedException ex){
             ex.printStackTrace();
