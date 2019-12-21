@@ -10,5 +10,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="com.btmatthews.junit:junit-rules:1.0.1" level="project" />
     <orderEntry type="library" name="groovy-2.5.8" level="application" />
+    <orderEntry type="library" name="org.knowm.xchart:xchart:3.6.0" level="project" />
   </component>
 </module>

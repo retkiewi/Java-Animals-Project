@@ -6,21 +6,29 @@ import java.util.concurrent.TimeUnit;
 public class World {
     public static void main(String args[]) {
         try {
-            int xSize = 80;
-            int ySize = 30;
-            int jungleSize = 10;
-            int grassEnergy = 5;
-            int animalMaxEnergy= 100;
-            Random random = new Random();
-            LoopingMap projectSpace = new LoopingMap(xSize, ySize, jungleSize, grassEnergy, animalMaxEnergy);
-            for(int i=0; i<40; i++)
-                new EvolvingAnimal(new Vector2d(random.nextInt(xSize),random.nextInt(ySize)), TurningDirection.NORTH, animalMaxEnergy/2, projectSpace);
+            Menu mainMenu = new Menu(toInts(args));
+
             while(true){
-                projectSpace.advanceYear();
-                TimeUnit.MILLISECONDS.sleep(100);
+                while(mainMenu.isPaused){
+                    TimeUnit.MILLISECONDS.sleep(50);
+                }
+                mainMenu.projectSpace.advanceYear();
+                mainMenu.statistics.update();
+                if(mainMenu.selector!=null && mainMenu.selector.animalData!=null && mainMenu.selector.animalData.animal!=null)
+                    mainMenu.selector.animalData.update();
+                TimeUnit.MILLISECONDS.sleep(50);
             }
         }catch(IllegalArgumentException | InterruptedException ex){
             ex.printStackTrace();
         }
+    }
+
+    public static Integer[] toInts(String args[]){
+        int size = args.length;
+        Integer [] arr = new Integer[size];
+        for(int i=0; i<size; i++) {
+            arr[i] = Integer.parseInt(args[i]);
+        }
+        return arr;
     }
 }

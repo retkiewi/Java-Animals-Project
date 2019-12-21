@@ -27,8 +27,17 @@ public class Tile extends JLabel{
         setIcon(biome);
     }
 
-    public void drawAnimal(){
-        ImageIcon animalIcon = new ImageIcon(this.getClass().getResource("animal.png"));
+    public void drawAnimal(EvolvingAnimal animal, int animalMaxEnergy){
+        ImageIcon animalIcon;
+        if(animal.energy<animalMaxEnergy/4)
+            animalIcon = new ImageIcon(this.getClass().getResource("animalLowEnergy.png"));
+        else if(animal.energy<animalMaxEnergy/2)
+            animalIcon = new ImageIcon(this.getClass().getResource("animalMediumEnergy.png"));
+        else
+            animalIcon = new ImageIcon(this.getClass().getResource("animalHighEnergy.png"));
+
         this.setIcon(animalIcon);
+
     }
+
 }

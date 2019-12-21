@@ -10,19 +10,20 @@ public class EvolvingAnimal extends MapEntity{
     int energy;
     int[] genome = new int[32];
     Random random = new Random();
-    EvolvingAnimal[] parents = new EvolvingAnimal[2];
     boolean isDead = false;
     int age = 0;
+    int breedingCooldown = 18;
+    int numberOfChildren = 0;
+    int bornAt;
 
     public EvolvingAnimal(Vector2d position, TurningDirection orientation, int energy, LoopingMap map){
+        this.bornAt = map.epoch;
         observerList.add(map);
         for(int i=0; i<genome.length; i++)
             genome[i] = random.nextInt(8);
         this.energy = energy;
         this.orientation=orientation;
         this.position = position;
-        this.parents[0] = null;
-        this.parents[1] = null;
         this.genome = validateGenome(genome);
         notifyObservers(new Vector2d(-1, -1));
     }
@@ -31,13 +32,13 @@ public class EvolvingAnimal extends MapEntity{
         observerList.add(map);
         this.orientation= parent1.orientation.turn(random.nextInt(8));
         this.position = parent2.position.add(orientation.toUnitVector());
-        this.parents[0] = parent1;
-        this.parents[1] = parent2;
-        this.genome = inherit(this.parents);
+        this.genome = inherit(parent1, parent2);
         parent1.energy-=map.animalMaxEnergy/4;
-        parent1.age=0;
+        parent1.breedingCooldown=18;
+        parent1.numberOfChildren++;
         parent2.energy-=map.animalMaxEnergy/4;
-        parent2.age=0;
+        parent2.breedingCooldown=18;
+        parent2.numberOfChildren++;
         this.energy=map.animalMaxEnergy/4 + map.animalMaxEnergy/4;
         notifyObservers(new Vector2d(-1, -1));
     }
@@ -51,6 +52,7 @@ public class EvolvingAnimal extends MapEntity{
         this.position = position.add(orientation.toUnitVector());
         this.energy--;
         this.age++;
+        this.breedingCooldown++;
         notifyObservers(this.position.subtract(orientation.toUnitVector()));
     }
 
@@ -64,16 +66,16 @@ public class EvolvingAnimal extends MapEntity{
         this.position=position;
     }
 
-    private int[] validateGenome(int[] genome){
+    private int[] validateGenome(int[] genome) {
         int[] validator = new int[8];
-        for(int counter : validator)
+        for (int counter : validator)
             counter = 0;
-        for(int gene : genome)
+        for (int gene : genome)
             validator[gene]++;
-        for(int i=0; i<validator.length; i++){
-            if(validator[i]==0){
+        for (int i = 0; i < validator.length; i++) {
+            if (validator[i] == 0) {
                 int temp = random.nextInt(genome.length);
-                while(validator[genome[temp]] <= 1){
+                while (validator[genome[temp]] <= 1) {
                     temp = random.nextInt(genome.length);
                 }
                 validator[genome[temp]]--;
@@ -84,18 +86,19 @@ public class EvolvingAnimal extends MapEntity{
         return genome;
     }
 
-    private int[] inherit(EvolvingAnimal[] parents){
+    private int[] inherit(EvolvingAnimal parent1, EvolvingAnimal parent2){
         int[] genome = new int[32];
         int i=0;
-        for(; i<random.nextInt(16); i++){
-            genome[i]=parents[0].genome[i];
+        for(; i<random.nextInt(8)+10; i++){
+            genome[i]=parent1.genome[i];
         }
         int j=i+1;
-        for(; j<i+random.nextInt(16)+1; j++){
-            genome[j]=parents[1].genome[j];
+        for(; j<32; j++){
+            genome[j]=parent2.genome[j];
         }
-        for(i=j+1; i<32; i++){
-            genome[i]=random.nextInt(8);
+        j=random.nextInt(5)+1;
+        for(i=0; i<j; i++){
+            genome[random.nextInt(32)]=random.nextInt(8);
         }
         return validateGenome(genome);
     }
@@ -106,4 +109,5 @@ public class EvolvingAnimal extends MapEntity{
             observer.funeralTime(this);
         }
     }
+
 }

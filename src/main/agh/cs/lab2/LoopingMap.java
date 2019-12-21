@@ -17,6 +17,9 @@ public class LoopingMap implements IPositionObserver{
     HashMap<Vector2d, List<Event>> events = new HashMap<>();
     public int grassEnergy;
     public int animalMaxEnergy;
+    public int deathCounter = 0;
+    public int sumOfAgeOfDeath = 0;
+    public int epoch=0;
 
 
     LoopingMap(int xSize, int ySize, int jungle_size, int grassEnergy, int animalMaxEnergy){
@@ -26,6 +29,10 @@ public class LoopingMap implements IPositionObserver{
         jungleBottomLeft = new Vector2d((topRight.x - jungle_size)/2+1, (topRight.y - jungle_size)/2+1);
         this.animalMaxEnergy = animalMaxEnergy;
         visualizer = new SwingMapVisualizer(this, this.bottomLeft, this.topRight, this.jungleBottomLeft, this.jungleTopRight);
+        for(int i=0; i<topRight.x*topRight.y/30; i++){
+            growGrassSavanna();
+            growGrassJungle();
+        }
     }
 
     public List<MapEntity> objectsAt(Vector2d position){
@@ -33,7 +40,7 @@ public class LoopingMap implements IPositionObserver{
         if(!hashedEntities.containsKey(position)){
             hashedEntities.put(position, new ArrayList<>());
         }
-        return hashedEntities.get(position);
+        return new ArrayList(hashedEntities.get(position));
     }
 
 
@@ -42,6 +49,7 @@ public class LoopingMap implements IPositionObserver{
         growGrassSavanna();
         moveAnimals();
         handleEvents();
+        epoch++;
     }
 
     private void handleEvents(){
@@ -108,9 +116,11 @@ public class LoopingMap implements IPositionObserver{
             if(hashedEntities.get(position)==null){
                 List<MapEntity> temp2 = new ArrayList<>();
                 temp2.add(temp);
+                grassList.add(temp);
                 hashedEntities.put(position, temp2);
             }else{
                 hashedEntities.get(position).add(temp);
+                grassList.add(temp);
             }
             return true;
         }
@@ -212,7 +222,7 @@ public class LoopingMap implements IPositionObserver{
         List<EvolvingAnimal> temp = getAnimalsByStrength(position);
         List<EvolvingAnimal> temp2 = new ArrayList<>();
         for (EvolvingAnimal animal:temp) {
-            if(animal.age >= 18 && animal.energy>=animalMaxEnergy/4)
+            if(animal.breedingCooldown >= 18 && animal.energy>=animalMaxEnergy/4)
                 temp2.add(animal);
         }
         if(temp2.size()>=2){
@@ -223,7 +233,7 @@ public class LoopingMap implements IPositionObserver{
     private void eat(Vector2d position){
         List<MapEntity> temp = strongestAnimals(position);
         for (MapEntity animal : temp) {
-            ((EvolvingAnimal)animal).energy = java.lang.Math.max(((EvolvingAnimal)animal).energy+grassEnergy/temp.size(), animalMaxEnergy);
+            ((EvolvingAnimal)animal).energy = java.lang.Math.min(((EvolvingAnimal)animal).energy+grassEnergy/temp.size(), animalMaxEnergy);
         }
         MapEntity tempGrass = null;
         for(MapEntity entity : hashedEntities.get(position)){
@@ -241,21 +251,25 @@ public class LoopingMap implements IPositionObserver{
         EvolvingAnimal animal = temp.get(temp.size()-1);
         while(animal.energy==0){
             if(animal.isDead){
-            temp.remove(animal);
-            hashedEntities.get(position).remove(animal);
-            animalList.remove(animal);
-            if(hashedEntities.get(position).isEmpty()){
-                hashedEntities.remove(position);
-                break;
-            }
-            animal=temp.get(temp.size()-1);
+                deathCounter++;
+                sumOfAgeOfDeath+=animal.age;
+                temp.remove(animal);
+                hashedEntities.get(position).remove(animal);
+                animalList.remove(animal);
+                if(hashedEntities.get(position).isEmpty()){
+                    hashedEntities.remove(position);
+                    break;
+                }
+                animal=temp.get(temp.size()-1);
             }
         }
         visualizer.updateTile(position, objectsAt(position).isEmpty()?null:objectsAt(position).get(0));
     }
 
-    private List<EvolvingAnimal> getAnimalsByStrength(Vector2d position){
-        List<MapEntity> temp = hashedEntities.get(position);
+    public List<EvolvingAnimal> getAnimalsByStrength(Vector2d position){
+        if(!hashedEntities.containsKey(position))
+            return new ArrayList<>();
+        List<MapEntity> temp = new ArrayList<>(hashedEntities.get(position));
         List<EvolvingAnimal> strongestAnimals = new ArrayList<>();
         do{
             strongestAnimals.add(((EvolvingAnimal) getStrongestAnimal(temp)));
@@ -263,13 +277,13 @@ public class LoopingMap implements IPositionObserver{
                 strongestAnimals.remove(strongestAnimals.size()-1);
                 break;
             }
-            temp = temp.subList(1, temp.size());
+            temp.remove(strongestAnimals.get(strongestAnimals.size()-1));
         }while(temp.size()>0);
         return strongestAnimals;
     }
 
     private List<MapEntity> strongestAnimals(Vector2d position){
-        List<MapEntity> temp = hashedEntities.get(position);
+        List<MapEntity> temp = new ArrayList<>(hashedEntities.get(position));
         List<MapEntity> strongestAnimals = new ArrayList<>();
         strongestAnimals.add(getStrongestAnimal(temp));
         if(strongestAnimals.get(strongestAnimals.size()-1) == null){
@@ -328,4 +342,5 @@ public class LoopingMap implements IPositionObserver{
         }
         return new Vector2d(tempX, tempY);
     }
+
 }
